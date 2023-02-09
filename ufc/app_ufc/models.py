@@ -1,20 +1,6 @@
 from django.db import models
 
 
-class Trainer(models.Model):
-    name = models.CharField(max_length=200, verbose_name='Весовая категория')
-    info = models.TextField(verbose_name='')
-    image = models.ImageField(verbose_name='', upload_to='photo_trainer/%Y/%m/%d')
-
-
-    class Meta:
-        verbose_name = ''
-        verbose_name_plural = ''
-
-
-    def __str__(self):
-        return self.name
-
 
 class Sportman(models.Model):
     CATEGORY = (
@@ -29,7 +15,7 @@ class Sportman(models.Model):
                 )
     category = models.CharField(max_length=3,choices=CATEGORY)
     name = models.CharField(max_length=200, verbose_name='Ф.И.О спортсмена')
-    trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
+    trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)
     reiting = models.IntegerField(verbose_name='Рейтинг')
     
     
@@ -42,7 +28,7 @@ class Sportman(models.Model):
     def __str__(self):
         return self.name
 
-class Treiner(models.Model):
+class Trainer(models.Model):
     name = models.CharField(max_length=200,verbose_name='Ф.И.О тренера')
     image = models.ImageField(verbose_name='Фотка Информация о тренере ', upload_to='photoTrainer/%Y/%m/%d/')
     
